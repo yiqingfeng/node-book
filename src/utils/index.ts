@@ -3,6 +3,7 @@
  */
 import path from 'path';
 import cp from './cp';
+import * as aPromise from './promise';
 
 const ROOT_PATH = path.resolve(__dirname, '../../');
 
@@ -17,5 +18,6 @@ function getPath(relatedPath: string = './'): string {
 
 export default {
   ...cp,
+  ...aPromise,
   getPath,
 };
