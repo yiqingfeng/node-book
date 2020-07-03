@@ -1,24 +1,21 @@
 /**
  * @description 浏览器相关操作
  */
-const puppeteer = require('puppeteer');
-const {
-  getPath,
-} = require('./utils');
-
+import puppeteer from 'puppeteer';
+import utils from './utils';
 // 浏览器实例 - 单例模式
-let browserInstance;
+let browserInstance : puppeteer.Browser | null | undefined;
 
 /**
  * @description 创建一个新的浏览器窗口
  * @param {boolean} isCreate 是否强制创建一个新的
  */
-async function createBrowser(isCreate) {
+async function createBrowser(isCreate ?: boolean): Promise<puppeteer.Browser> {
   if (!isCreate && browserInstance) return browserInstance;
 
   let browser = await puppeteer.launch({
     // executablePath: './chrome-mac/Chromium.app/Contents/MacOS/Chromium'
-    executablePath: getPath('./chrome-mac/Chromium.app/Contents/MacOS/Chromium'),
+    executablePath: utils.getPath('./chrome-mac/Chromium.app/Contents/MacOS/Chromium'),
   });
 
   if (!isCreate) {
@@ -32,7 +29,7 @@ async function createBrowser(isCreate) {
  * @description 创建新标签页面
  * @param {browser} browser 指定浏览器
  */
-async function createNewPage(browser) {
+async function createNewPage(browser ?: puppeteer.Browser | null): Promise<puppeteer.Page> {
   browser = browser || browserInstance;
   if (!browser) {
     browser = await createBrowser();
@@ -54,9 +51,8 @@ async function destroyBrowser() {
   browserInstance = null;
 }
 
-
-Object.assign(exports, {
+export default {
   create: createBrowser,
   newPage: createNewPage,
   destroy: destroyBrowser,
-});
+}

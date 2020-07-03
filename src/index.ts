@@ -18,8 +18,8 @@
 //   await browser.close();
 // })()
 
-const browser = require('./src/browser');
-const download = require('./src/download');
+const browser = require('./browser');
+const download = require('./download');
 
 (async () => {
 

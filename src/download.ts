@@ -1,15 +1,15 @@
 /**
  * @description 相关页面下载
  */
-const browser = require('./browser');
+import browser from './browser';
 /**
  * @description 获取所有可下载列表
- * @param {url} startUrl 包含目录的起始页面地址
+ * @param {string} url 包含目录的起始页面地址
  */
-async function getAllUrls(startUrl) {
+async function getAllUrls(url: string) {
   const page = await browser.newPage();
 
-  await page.goto(startUrl, {
+  await page.goto(url, {
     waitUntil: 'networkidle2'
   });
 
@@ -17,6 +17,13 @@ async function getAllUrls(startUrl) {
 
   return urls;
 }
+
+
+// async function getAllPages(url) {
+//   const urls = await getAllUrls(url);
+
+
+// }
 
 Object.assign(exports, {
   getAllUrls,
