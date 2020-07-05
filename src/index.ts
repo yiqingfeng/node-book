@@ -17,15 +17,12 @@
 
 //   await browser.close();
 // })()
-
-const browser = require('./browser');
-const download = require('./download');
+import browser from './browser';
+import download from './download';
 
 (async () => {
 
-  const urls = await download.getAllUrls('https://ustbhuangyi.github.io/vue-analysis/v2/prepare/');
-
-  console.log(urls);
+  const urls = await download.getPdfForPages('https://ustbhuangyi.github.io/vue-analysis/v2/prepare/');
 
   await browser.destroy();
 })();
